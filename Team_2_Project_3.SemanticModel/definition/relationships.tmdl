@@ -1,0 +1,10 @@
+relationship 5cddf50b-54de-450b-892a-65831d723364
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Superstore Sales Dataset'.'Ship Date'
+	toColumn: LocalDateTable_db4f84cd-5a88-4b5b-b391-654a37778ec3.Date
+
+relationship 0bed348e-85d7-482a-bcf5-cc0722782d12
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Superstore Sales Dataset'.'Order Date'
+	toColumn: LocalDateTable_91d98f62-9e0b-433f-a09e-fad609822691.Date
+

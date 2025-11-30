@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "57e299bba3c893e38d7a",
+  "position": {
+    "x": 9.54070188757376,
+    "y": 418.2007660719832,
+    "z": 7000,
+    "height": 151.06111321991787,
+    "width": 279.86058870216362,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Regions"
+                }
+              },
+              "queryRef": "_Measures.Regions",
+              "nativeQueryRef": "Regions"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

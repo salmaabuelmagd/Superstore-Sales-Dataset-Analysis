@@ -1,0 +1,76 @@
+table _Measures
+	lineageTag: 0b18266b-c853-4dcd-8d2d-3ee3387381a1
+
+	measure 'Total Sales' = SUM('Superstore Sales Dataset'[Sales])
+		formatString: 0.00
+		lineageTag: 070f54e5-f8f7-480a-85a7-98595b46c32c
+
+	measure 'Total Orders' = DISTINCTCOUNT('Superstore Sales Dataset'[Product ID])
+		formatString: 0
+		lineageTag: dc6e4683-c038-498f-ac33-490eb318dbeb
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Total Cities' = DISTINCTCOUNT('Superstore Sales Dataset'[City])
+		formatString: 0
+		lineageTag: 255f2bd2-1a92-4eda-9649-fe50c05ff0dd
+
+	measure 'Ship modes' = DISTINCTCOUNT('Superstore Sales Dataset'[Ship Mode])
+		formatString: 0
+		lineageTag: 13dfa39b-b116-4d05-9f4e-a81a864488c7
+
+	measure Segments = DISTINCTCOUNT('Superstore Sales Dataset'[Segment])
+		formatString: 0
+		lineageTag: ce817df4-6231-46a8-8670-21acd7e8c75f
+
+	measure Categoris = DISTINCTCOUNT('Superstore Sales Dataset'[Category])
+		formatString: 0
+		lineageTag: 9457d046-2cba-4ee5-9cf9-4d7e56c62cbe
+
+	measure Sub_Categories = DISTINCTCOUNT('Superstore Sales Dataset'[Sub-Category])
+		formatString: 0
+		lineageTag: afa880ca-3a3b-41d8-881e-ae5b0a75226c
+
+	measure Regions = DISTINCTCOUNT('Superstore Sales Dataset'[Region])
+		formatString: 0
+		lineageTag: 5f49d100-ce72-446d-afda-9e405e5a10c8
+
+	measure States = DISTINCTCOUNT('Superstore Sales Dataset'[State])
+		formatString: 0
+		lineageTag: 654867a2-2061-4865-9cd3-12ec1c76e2a9
+
+	measure 'Product Names' = DISTINCTCOUNT('Superstore Sales Dataset'[Product Name])
+		formatString: 0
+		lineageTag: 1d990a1f-9691-4cc8-8336-1035a86b1803
+
+	measure 'Total Customers' = DISTINCTCOUNT('Superstore Sales Dataset'[Customer ID])
+		formatString: 0
+		lineageTag: 40f72db0-288b-4036-8885-d6443be59d3f
+
+	measure 'Sales Trends' = TOTALYTD([Total Sales],'Superstore Sales Dataset'[Order Date])
+		formatString: 0
+		lineageTag: ed6f8f77-e30f-411d-a75f-f5c913771519
+
+	measure 'Sales Per Order' = [Total Sales]/[Total Orders]
+		lineageTag: e37b5ad1-187c-483e-b036-b093db3fe28d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Count of Orders' = DISTINCTCOUNT('Superstore Sales Dataset'[Order ID])
+		formatString: 0
+		lineageTag: dffa2dae-67d8-4b5d-8af1-990a7c844f08
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
